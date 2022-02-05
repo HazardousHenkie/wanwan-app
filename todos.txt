@@ -1,0 +1,7 @@
+add eslint
+add prettier
+add auto loading componentss
+add stylelint
+add styled components
+add precommit
+add special stylecss/postcss/etc. styled compoent
