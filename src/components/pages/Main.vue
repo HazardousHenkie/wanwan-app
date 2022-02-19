@@ -13,9 +13,12 @@
         <h2>Score: {{ score }}</h2>
 
         <div class="flex">
-            <CardsStack :cards="leftDeck" @hide-card="removeCardFromDecks" />
+            <CardsStack :cards="leftDeck" @hide-card="removeCardFromLeftDeck" />
 
-            <CardsStack :cards="rightDeck" @hide-card="removeCardFromDecks" />
+            <CardsStack
+                :cards="rightDeck"
+                @hide-card="removeCardFromRightDeck"
+            />
         </div>
     </div>
 </template>
@@ -36,7 +39,28 @@ const leftDeck = ref<{ dog: boolean; url: string }[]>([])
 const rightDeck = ref<{ dog: boolean; url: string }[]>([])
 
 // TODO: abstract this one
-const removeCardFromDecks = (selectedCard: { dog: boolean; url: string }) => {
+const removeCardFromLeftDeck = (selectedCard: {
+    dog: boolean
+    url: string
+}) => {
+    console.log('left')
+    if (selectedCard.dog) {
+        rightChoice.value = 'true'
+        score.value++
+    } else {
+        rightChoice.value = 'false'
+        score.value--
+    }
+
+    leftDeck.value.shift()
+    rightDeck.value.shift()
+}
+
+const removeCardFromRightDeck = (selectedCard: {
+    dog: boolean
+    url: string
+}) => {
+    console.log('right')
     if (selectedCard.dog) {
         rightChoice.value = 'true'
         score.value++
@@ -103,6 +127,7 @@ const fillDecks = () => {
                 leftDeck.value.push({ dog: false, url: cats.value[0] })
                 rightDeck.value.push({ dog: true, url: dog })
             }
+            dogs.value.shift()
             cats.value.shift()
         })
     })
