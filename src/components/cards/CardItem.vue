@@ -145,13 +145,14 @@ const interactUnsetElement = () => {
 }
 
 const resetCardPosition = () => {
-    isInteractMoving.value = false
     interactSetPosition({ x: 0, rotation: 0 })
 }
 
 const handleOnClick = () => {
     if (!isInteractMoving.value) {
         playCard(CARD_STATES.ACCEPT_CARD)
+    } else {
+        isInteractMoving.value = false
     }
 }
 </script>

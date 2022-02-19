@@ -87,26 +87,22 @@ const fetchCatImage = async () => {
     }
 }
 
-const fillDecks = () => {
-    let promiseList = []
-
+const fillDecks = async () => {
     for (let i = 0; i < 5; i++) {
-        promiseList.push(fetchDogImage())
-        promiseList.push(fetchCatImage())
+        await fetchDogImage()
+        await fetchCatImage()
     }
 
-    Promise.all(promiseList).then(() => {
-        dogs.value.map((dog) => {
-            if (Math.random() < 0.5) {
-                leftDeck.value.push({ dog: true, url: dog })
-                rightDeck.value.push({ dog: false, url: cats.value[0] })
-            } else {
-                leftDeck.value.push({ dog: false, url: cats.value[0] })
-                rightDeck.value.push({ dog: true, url: dog })
-            }
+    dogs.value.map((dog) => {
+        if (Math.random() < 0.5) {
+            leftDeck.value.push({ dog: true, url: dog })
+            rightDeck.value.push({ dog: false, url: cats.value[0] })
+        } else {
+            leftDeck.value.push({ dog: false, url: cats.value[0] })
+            rightDeck.value.push({ dog: true, url: dog })
+        }
 
-            cats.value.shift()
-        })
+        cats.value.shift()
     })
 }
 
