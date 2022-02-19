@@ -1,7 +1,22 @@
-add eslint
-add prettier
-add auto loading componentss
+
+
 add stylelint
 add styled components
 add precommit
 add special stylecss/postcss/etc. styled compoent
+check if we need all the scss files
+clean the cardItem stuff
+check todos
+add router
+check if auto loader components can work outside compoentns/
+change sass to taiwlidn where we can
+use fallback fro loading
+create loader
+change css names
+make score and randomly add diffirent animals
+change style
+add reset
+add neko
+add translations
+
+geef property van item terug and check if die geluik is aan de positie waar je hem heb heen gedaan and ++
