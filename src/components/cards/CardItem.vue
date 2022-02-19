@@ -8,9 +8,10 @@
         }"
         class="card"
         :style="{ transform: transformString }"
+        @click="handleOnClick"
     >
         <!-- should be a slot wtih binding -->
-        <img alt="犬" :src="card" class="image" />
+        <img alt="犬" :src="card.url" class="image" />
     </div>
 </template>
 
@@ -19,7 +20,7 @@
 // TODO: interact is fine?
 import interact from 'interactjs'
 import Interact from '@interactjs/types'
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, PropType } from 'vue'
 import { CARD_STATES } from '../../enums'
 
 interface Position {
@@ -34,7 +35,7 @@ const interactXThreshold = 100
 
 const props = defineProps({
     card: {
-        type: String,
+        type: Object as PropType<{ dog: boolean; url: string }>,
         required: true,
     },
     isCurrent: {
@@ -144,6 +145,10 @@ const interactUnsetElement = () => {
 const resetCardPosition = () => {
     interactSetPosition({ x: 0, rotation: 0 })
 }
+
+const handleOnClick = () => {
+    playCard(CARD_STATES.ACCEPT_CARD)
+}
 </script>
 
 <style scoped lang="scss">
@@ -173,7 +178,7 @@ $fs-card-title: 1.125em;
     }
 
     display: flex;
-    max-height: 350px;
+    max-height: 450px;
     margin: auto;
     font-size: $fs-h2;
     font-weight: $fw-bold;

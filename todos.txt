@@ -20,3 +20,5 @@ add neko
 add translations
 
 geef property van item terug and check if die geluik is aan de positie waar je hem heb heen gedaan and ++
+
+make single mode
