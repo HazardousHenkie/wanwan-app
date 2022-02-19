@@ -54,6 +54,7 @@ const interactElement = ref()
 const isShowing = ref(true)
 const isInteractAnimating = ref(true)
 const isInteractDragged = ref(false)
+const isInteractMoving = ref(false)
 const interactPosition = ref({ x: 0, rotation: 0 })
 
 // TODO: Do we need this/ if not animating or is dragging change styles
@@ -71,6 +72,7 @@ onMounted(() => {
     interact(interactElement.value).draggable({
         onstart: () => {
             isInteractAnimating.value = false
+            isInteractMoving.value = true
         },
 
         onmove: (event: Interact.InteractEvent) => {
@@ -85,16 +87,16 @@ onMounted(() => {
             interactSetPosition({ x, rotation })
         },
 
-        // onend: () => {
-        //     const { x } = interactPosition.value
-        //     isInteractAnimating.value = true
+        onend: () => {
+            const { x } = interactPosition.value
+            isInteractAnimating.value = true
 
-        //     if (x > interactXThreshold) {
-        //         playCard(CARD_STATES.ACCEPT_CARD)
-        //     } else if (x < -interactXThreshold) {
-        //         playCard(CARD_STATES.REJECT_CARD)
-        //     } else resetCardPosition()
-        // },
+            if (x > interactXThreshold) {
+                playCard(CARD_STATES.ACCEPT_CARD)
+            } else if (x < -interactXThreshold) {
+                playCard(CARD_STATES.REJECT_CARD)
+            } else resetCardPosition()
+        },
     })
 })
 
@@ -143,11 +145,14 @@ const interactUnsetElement = () => {
 }
 
 const resetCardPosition = () => {
+    isInteractMoving.value = false
     interactSetPosition({ x: 0, rotation: 0 })
 }
 
 const handleOnClick = () => {
-    playCard(CARD_STATES.ACCEPT_CARD)
+    if (!isInteractMoving.value) {
+        playCard(CARD_STATES.ACCEPT_CARD)
+    }
 }
 </script>
 

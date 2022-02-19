@@ -13,6 +13,7 @@ change sass to taiwlidn where we can
 use fallback fro loading
 create loader
 change css names
+check css and do we need sass?
 make score and randomly add diffirent animals
 change style
 add reset
