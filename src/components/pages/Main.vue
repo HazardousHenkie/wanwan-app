@@ -43,7 +43,6 @@ const removeCardFromLeftDeck = (selectedCard: {
     dog: boolean
     url: string
 }) => {
-    console.log('left')
     if (selectedCard.dog) {
         rightChoice.value = 'true'
         score.value++

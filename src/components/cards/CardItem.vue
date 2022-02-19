@@ -85,16 +85,16 @@ onMounted(() => {
             interactSetPosition({ x, rotation })
         },
 
-        onend: () => {
-            const { x } = interactPosition.value
-            isInteractAnimating.value = true
+        // onend: () => {
+        //     const { x } = interactPosition.value
+        //     isInteractAnimating.value = true
 
-            if (x > interactXThreshold) {
-                playCard(CARD_STATES.ACCEPT_CARD)
-            } else if (x < -interactXThreshold) {
-                playCard(CARD_STATES.REJECT_CARD)
-            } else resetCardPosition()
-        },
+        //     if (x > interactXThreshold) {
+        //         playCard(CARD_STATES.ACCEPT_CARD)
+        //     } else if (x < -interactXThreshold) {
+        //         playCard(CARD_STATES.REJECT_CARD)
+        //     } else resetCardPosition()
+        // },
     })
 })
 
